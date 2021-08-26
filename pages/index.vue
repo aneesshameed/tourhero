@@ -2,7 +2,7 @@
   <v-container class="col-lg-8 col-xl-7 mt-15">
     <v-row>
       <v-col lg="10" xl="10">
-        <v-container id="cntr_itienary" v-if="itienary != null">
+        <v-container v-if="itienary != null" id="cntr_itienary">
           <v-row>
             <v-col>
               <div class="d-flex flex-row ml-5">
@@ -65,7 +65,9 @@
                                 }}</span>
                               </div>
                               <div class="my-3 grey--text text--darken-1">
-                                {{ item.description }}
+                                <v-clamp autoresize :max-lines="3">{{
+                                  item.description
+                                }}</v-clamp>
                               </div>
                               <span
                                 class="teal--text text--darken-1 tw-underline"
@@ -101,8 +103,12 @@
 </template>
 <script>
 import yaml from 'js-yaml'
+import VClamp from 'vue-clamp'
 
 export default {
+  components: {
+    VClamp,
+  },
   data() {
     return {
       images: [
