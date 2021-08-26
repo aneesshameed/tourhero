@@ -18,6 +18,20 @@
               <div class="itienary-container">
                 <v-container class="ma-0 pa-0">
                   <v-row>
+                    <v-col cols="1" align="center">
+                      <div style="height: 600px">
+                        <div class="lines">
+                          <template v-for="(__, index) in itienary.days">
+                            <div :key="`dot_${index}`" class="dot"></div>
+                            <div
+                              v-if="index != itienary.days.length - 1"
+                              :key="`line_${index}`"
+                              class="line"
+                            ></div>
+                          </template>
+                        </div>
+                      </div>
+                    </v-col>
                     <v-col>
                       <v-container class="ma-0 pa-0" style="height: 600px">
                         <v-row
@@ -240,3 +254,38 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+.itienary-container {
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.itienary-container::-webkit-scrollbar {
+  width: 5px;
+  background: #80cbc4;
+  border-radius: 20px;
+}
+
+.itienary-container::-webkit-scrollbar-thumb {
+  background: #009688;
+  border-radius: 20px;
+}
+
+.lines {
+  margin-top: 80px;
+  width: 14px;
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    background: #d1d6e6;
+    border-radius: 7px;
+  }
+
+  .line {
+    height: 180px;
+    width: 2px;
+    background: #d1d6e6;
+  }
+}
+</style>
