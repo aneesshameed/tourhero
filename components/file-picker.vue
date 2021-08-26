@@ -8,7 +8,14 @@
       <v-icon class="mdi-rotate-90 white--text">mdi-attachment</v-icon>
     </v-btn>
     <div class="pa-2 ma-5">Add the YAML File</div>
-    <input ref="fileInput" type="file" hidden name="file" @change="readFile" />
+    <input
+      ref="fileInput"
+      type="file"
+      hidden
+      name="file"
+      accept="yaml/*"
+      @change="readFile"
+    />
   </div>
 </template>
 <script>
@@ -27,17 +34,35 @@ export default {
     },
     readFile() {
       // Reads YAML file and update the itienary details
-      const reader = new FileReader()
-      reader.addEventListener('load', (evt) => {
-        const data = evt.target.result
-        yaml.loadAll(
-          data,
-          function (doc) {
-            this.$store.commit('set_itienary', doc)
-          }.bind(this)
-        )
-      })
-      reader.readAsText(this.$refs.fileInput.files[0])
+
+      try {
+        const fileName = this.$refs.fileInput.files[0].name
+        this.$store.commit('set_itienary', null)
+
+        if (fileName.split('.')[1] !== 'yaml') {
+          this.$store.commit('set_error', 'Selected file is not a yaml one')
+          return
+        }
+
+        const reader = new FileReader()
+        reader.addEventListener('load', (evt) => {
+          const data = evt.target.result
+          yaml.loadAll(
+            data,
+            function (doc) {
+              if (doc.days === undefined) {
+                this.$store.commit('set_error', 'Thats not a right yaml file')
+                return
+              }
+              this.$store.commit('set_itienary', doc)
+              this.$store.commit('set_error', null)
+            }.bind(this)
+          )
+        })
+        reader.readAsText(this.$refs.fileInput.files[0])
+      } catch (err) {
+        this.$store.commit('set_error', err.message)
+      }
     },
   },
 }

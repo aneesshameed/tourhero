@@ -18,6 +18,11 @@
         <FilePicker />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col align="center">
+        <span class="tw-text-3xl">{{ error }}</span>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
@@ -34,6 +39,7 @@ export default {
   computed: {
     ...mapState({
       itienary: (state) => state.itienary,
+      error: (state) => state.error,
     }),
   },
 }
