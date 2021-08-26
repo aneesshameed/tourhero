@@ -88,6 +88,7 @@ import VClamp from 'vue-clamp'
 import { mapState } from 'vuex'
 
 export default {
+   name: 'ItienaryComponent',
   components: {
     VClamp,
   },
