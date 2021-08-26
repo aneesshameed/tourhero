@@ -1,3 +1,6 @@
+/*
+  Stores itienary details that is being passed in from the FilePicker 
+*/
 export const state = () => ({
   itienary: null,
 })

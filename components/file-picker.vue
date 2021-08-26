@@ -1,3 +1,7 @@
+<!--
+  A file picker that helps to pick the yaml file and read it contents
+  Once the contents are read then the vuex will be updated, which will then make the itineary component visible
+-->
 <template>
   <div>
     <v-btn id="btn_addFile" fab color="blue darken-4" @click="addFile">

@@ -1,8 +1,13 @@
+<!--
+  Displays a dot-line-dot that simulates a timeline, a set of 3 random images for easy days in the itineary
+  and the itineary.day details which displays the day count the title and the discription
+-->
 <template>
   <div class="itienary-container">
     <v-container class="ma-0 pa-0">
       <v-row>
         <v-col cols="1" align="center">
+          <!--dot-line-dot-->
           <div style="height: 600px">
             <div class="lines">
               <template v-for="(__, index) in days">
@@ -25,6 +30,7 @@
             >
               <v-col lg="4" xl="3">
                 <div class="d-flex flex-row tw-overflow-hidden">
+                  <!-- Random Image -->
                   <v-sheet
                     height="160"
                     width="220"
@@ -58,6 +64,7 @@
                 </div>
               </v-col>
               <v-col xl="8">
+                <!-- itinery.day details -->
                 <div class="d-flex flex-column mx-5">
                   <div class="d-flex flex-row">
                     <span class="tw-font-bold tw-w-24"
